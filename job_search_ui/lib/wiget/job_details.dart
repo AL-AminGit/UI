@@ -12,85 +12,119 @@ class JobDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 600,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Align(
-            child: Container(
-              height: 8,
-              width: 20,
-              color: Colors.black,
+      height: 500,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Align(
+              child: Container(
+                height: 8,
+                width: 50,
+                color: Colors.grey,
+              ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
+            Container(
+              padding: EdgeInsets.all(30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Image.asset(_job.logoUrl),
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.all(20),
+                        height: 50,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.withOpacity(.1),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Image.asset(
+                          _job.logoUrl,
+                        ),
+                      ),
+                      Text(_job.company),
+                    ],
                   ),
-                  Text(_job.company),
+                  Row(
+                    children: [
+                      Icon(Icons.bookmark),
+                      Icon(Icons.more_horiz),
+                    ],
+                  ),
                 ],
               ),
-              Row(
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 30),
+              child: Text(
+                _job.title,
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(Icons.bookmark),
-                  Icon(Icons.more_horiz),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.location_on_outlined,
+                        color: Colors.orange.withOpacity(.2),
+                      ),
+                      Text(
+                        _job.location,
+                        style: TextStyle(fontSize: 12),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.timer),
+                      Text("Full Time"),
+                    ],
+                  ),
                 ],
               ),
-            ],
-          ),
-          Text(_job.title),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Icon(Icons.location_on_outlined),
-                  Text(_job.location),
-                ],
-              ),
-              Row(
-                children: [
-                  Icon(Icons.timer),
-                  Text("Full Time"),
-                ],
-              ),
-            ],
-          ),
-          Text("Requirements"),
+            ),
 
-          //spread operator
-          ..._job.req
-              .map((e) => Container(
-                    child: Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.all(30),
-                          height: 8,
-                          width: 8,
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(30),
+            Container(
+              padding: EdgeInsets.all(30),
+              child: Text(
+                "Requirements",
+                style: TextStyle(
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22),
+                //textAlign: TextAlign.end,
+              ),
+            ),
+
+            //spread operator
+            ..._job.req
+                .map((e) => Container(
+                      child: Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(30),
+                            height: 8,
+                            width: 8,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
                           ),
-                        ),
-                        ConstrainedBox(
-                          constraints: BoxConstraints(maxWidth: 300),
-                          child: Text(e),
-                        ),
-                      ],
-                    ),
-                  ))
-              .toList(),
-        ],
+                          ConstrainedBox(
+                            constraints: BoxConstraints(maxWidth: 300),
+                            child: Text(e),
+                          ),
+                        ],
+                      ),
+                    ))
+                .toList(),
+          ],
+        ),
       ),
     );
   }
